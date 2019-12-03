@@ -3,7 +3,6 @@ import Facultys.TypeFaculity;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class Main {
     static List<Student> allStudent = Arrays.asList(
@@ -27,7 +26,9 @@ public class Main {
 
     public static void main(String[] args) {
         University testUniversity = new University(allStudent);
-        System.out.println(testUniversity.getListStudentsOfBiologicalFaculity().toString());
-        System.out.println(testUniversity.averageGradeCalculator(testUniversity.getStudentFromList("Marc","Mars")));
+        System.out.println(testUniversity.getAllStudent().toString());
+        System.out.println(testUniversity.averageStudentGradeCalculator(testUniversity.getStudentFromList("Marc","Mars")));
+        System.out.println(testUniversity.averageGradeBySubjectOfGroupAndFaculty("Human Chemical", GroupOfStudents.EASY, TypeFaculity.CHEMICAL));
+        System.out.println(testUniversity.averageGradeOfSubjectByAllUniversity("Human Chemical"));
     }
 }

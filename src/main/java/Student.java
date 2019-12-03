@@ -20,7 +20,7 @@ public class Student {
         this.lastName = lastName;
         this.typeFaculity = typeFaculity;
         this.groupOfStudents = groupOfStudents;
-        this.studentSubjects.addAll(University.getlistOfSubjectByFaculty(typeFaculity));
+        this.studentSubjects.addAll(University.getListOfSubjectByFaculty(typeFaculity));
         this.studentSubjects.addAll(University.addSubjectsOfGroup(groupOfStudents));
     }
 
@@ -34,6 +34,10 @@ public class Student {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public GroupOfStudents getGroupOfStudents() {
+        return groupOfStudents;
     }
 
     public List<Subject> getStudentSubjects() {
