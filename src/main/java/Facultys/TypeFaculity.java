@@ -15,7 +15,7 @@ public enum TypeFaculity {
         this.title = title;
     }
 
-    public String getTitle(){
+    public String getFacultyTitle(){
         return title;
     }
 

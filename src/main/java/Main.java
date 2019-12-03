@@ -20,15 +20,17 @@ public class Main {
             new Student("Nick", "Stone", TypeFaculity.CHEMICAL,GroupOfStudents.HARD),
             new Student("Daris", "Heris", TypeFaculity.CHEMICAL,GroupOfStudents.EASY),
             new Student("Phill", "Mouth", TypeFaculity.CHEMICAL,GroupOfStudents.NORMAL),
-            new Student("Father", "Mather", TypeFaculity.CHEMICAL,GroupOfStudents.EASY)
+            new Student("Father", "Mother", TypeFaculity.CHEMICAL,GroupOfStudents.EASY)
     );
 
 
     public static void main(String[] args) {
         University testUniversity = new University(allStudent);
         System.out.println(testUniversity.getAllStudent().toString());
-        System.out.println(testUniversity.averageStudentGradeCalculator(testUniversity.getStudentFromList("Marc","Mars")));
-        System.out.println(testUniversity.averageGradeBySubjectOfGroupAndFaculty("Human Chemical", GroupOfStudents.EASY, TypeFaculity.CHEMICAL));
-        System.out.println(testUniversity.averageGradeOfSubjectByAllUniversity("Human Chemical"));
+
+//        testUniversity.averageStudentGradeCalculator(testUniversity.getStudentFromListOfStudents());
+//        testUniversity.averageGradeBySubjectOfGroupAndFaculty();
+
+        testUniversity.averageGradeOfSubjectByAllUniversity();
     }
 }

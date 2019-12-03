@@ -20,8 +20,8 @@ public class Student {
         this.lastName = lastName;
         this.typeFaculity = typeFaculity;
         this.groupOfStudents = groupOfStudents;
-        this.studentSubjects.addAll(University.getListOfSubjectByFaculty(typeFaculity));
-        this.studentSubjects.addAll(University.addSubjectsOfGroup(groupOfStudents));
+        this.studentSubjects.addAll(University.addListOfSubjectByFaculty(typeFaculity));
+        this.studentSubjects.addAll(University.addSubjectsOfGroupToSubjectList(groupOfStudents));
     }
 
     public TypeFaculity getTypeFaculity() {
@@ -47,7 +47,7 @@ public class Student {
 
     public String toString() {
         return "\n" + "Name: " + firstName + " " + lastName + "\n" +
-                "Faculty: " + typeFaculity.getTitle() + "\n" +
+                "Faculty: " + typeFaculity.getFacultyTitle() + "\n" +
                 "Group: " + groupOfStudents.getGroupTitle() + "\n" +
                 "Subjects: " + studentSubjects.toString() + "\n";
     }

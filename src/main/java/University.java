@@ -1,37 +1,12 @@
 import Facultys.GroupOfStudents;
 import Facultys.TypeFaculity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class University {
     private List<Student> allStudent;
 
-    public List<Student> getListStudentsOfBiologicalFaculty() {
-        List<Student> listOfBiologists = new ArrayList<>();
-        for (Student student : allStudent) {
-            if (student.getTypeFaculity().equals(TypeFaculity.BIOLOGY)) {
-                listOfBiologists.add(student);
-            }
-        }
-        return listOfBiologists;
-    }
-
-
-
-    public Student getStudentFromList(String firstName, String lastName) {
-        Student searchStudent = new Student();
-        for (Student student : allStudent) {
-            if (firstName.equals(student.getFirstName()) && lastName.equals(student.getLastName())) {
-                searchStudent = student;
-            }
-        }
-        return searchStudent;
-    }
-
-    public static List<Subject> getListOfSubjectByFaculty(TypeFaculity faculty) {
+    public static List<Subject> addListOfSubjectByFaculty(TypeFaculity faculty) {
         Random randomGrade = new Random();
         int gradeFirst = randomGrade.nextInt(10) + 1;
         int gradeSecond = randomGrade.nextInt(10) + 1;
@@ -47,7 +22,7 @@ public class University {
         }
     }
 
-    public static List<Subject> addSubjectsOfGroup(GroupOfStudents groupOfStudents) {
+    public static List<Subject> addSubjectsOfGroupToSubjectList(GroupOfStudents groupOfStudents) {
         Random randomGrade = new Random();
         int gradeFirst = randomGrade.nextInt(10) + 1;
         int gradeSecond = randomGrade.nextInt(10) + 1;
@@ -63,6 +38,89 @@ public class University {
         }
     }
 
+    public Student getStudentFromListOfStudents() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input first name: ");
+        String firstName = scanner.nextLine();
+        System.out.print("Input last name: ");
+        String lastName = scanner.nextLine();
+        Student searchStudent = new Student();
+        for (Student student : allStudent) {
+            if (firstName.equals(student.getFirstName()) && lastName.equals(student.getLastName())) {
+                searchStudent = student;
+            }
+        }
+        return searchStudent;
+    }
+
+    //This method calculates the average mark in all subjects of the student
+    public void averageStudentGradeCalculator(Student student) {
+        int average = 0;
+        int countSubject = 0;
+        for (Subject subject : student.getStudentSubjects()) {
+            average += subject.getGrade();
+            countSubject++;
+        }
+        System.out.println("Average grade " + student.getFirstName() + " " + student.getLastName() + " is " + (float) average / countSubject);
+    }
+
+
+    //This method calculates the average score for a specific subject in a specific group and at a specific faculty
+    public void averageGradeBySubjectOfGroupAndFaculty() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input subject: ");
+        String subjectSearch = scanner.nextLine();
+        System.out.print("Input group: ");
+        String group = scanner.nextLine();
+        System.out.print("Input faculty: ");
+        String faculty = scanner.nextLine();
+        int average = 0;
+        int countSubjects = 0;
+        List<Student> tempList = new ArrayList<>();
+        for (Student student : allStudent) {
+            if (faculty.equals(student.getTypeFaculity().getFacultyTitle()) && group.equals(student.getGroupOfStudents().getGroupTitle())) {
+                tempList.add(student);
+            }
+        }
+        for (Student student : tempList) {
+            for (Subject subject : student.getStudentSubjects()) {
+                if (subjectSearch.equals(subject.getNameSubject())) {
+                    average += subject.getGrade();
+                    countSubjects++;
+                }
+            }
+        }
+        System.out.println("Average grade of " + subjectSearch + " on group " + group + " on " + faculty + " faculty is " + (float) average / countSubjects);
+
+    }
+
+
+    //This method calculates the average grade for an entire university
+    public void averageGradeOfSubjectByAllUniversity() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input name  of subject: ");
+        String subjectSearch = scanner.nextLine();
+        int average = 0;
+        int countSubjects = 0;
+        for (Student student : allStudent) {
+            for (Subject subject : student.getStudentSubjects()) {
+                if (subjectSearch.equals(subject.getNameSubject())) {
+                    average += subject.getGrade();
+                    countSubjects++;
+                }
+            }
+        }
+        System.out.println("Average grade of " + subjectSearch + " by whole university is " + (float) average / countSubjects);
+
+    }
+
+    public List<Student> getAllStudent() {
+        return allStudent;
+    }
+
+    public University(List<Student> allStudent) {
+        this.allStudent = allStudent;
+    }
 
     public List<Student> getListStudentsOfChemicalFaculty() {
         List<Student> listOfChemists = new ArrayList<>();
@@ -84,62 +142,14 @@ public class University {
         return listOfPhysics;
     }
 
-
-    //This method calculates the average mark in all subjects of the student
-    public float averageStudentGradeCalculator(Student student) {
-        int average = 0;
-        int countSubject = 0;
-        for (Subject subject : student.getStudentSubjects()) {
-            average += subject.getGrade();
-            countSubject++;
-        }
-        return (float) average / countSubject;
-    }
-
-
-    //This method calculates the average score for a specific subject in a specific group and at a specific faculty
-    public float averageGradeBySubjectOfGroupAndFaculty(String subjectSearch, GroupOfStudents group, TypeFaculity faculty) {
-        int average = 0;
-        int countSubjects = 0;
-        List<Student> tempList = new ArrayList<>();
+    public List<Student> getListStudentsOfBiologicalFaculty() {
+        List<Student> listOfBiologists = new ArrayList<>();
         for (Student student : allStudent) {
-            if (faculty.equals(student.getTypeFaculity()) && group.equals(student.getGroupOfStudents())) {
-                tempList.add(student);
+            if (student.getTypeFaculity().equals(TypeFaculity.BIOLOGY)) {
+                listOfBiologists.add(student);
             }
         }
-        for (Student student : tempList) {
-            for (Subject subject : student.getStudentSubjects()) {
-                if (subjectSearch.equals(subject.getNameSubject())) {
-                    average += subject.getGrade();
-                    countSubjects++;
-                }
-            }
-        }
-        return (float) average/countSubjects;
-    }
-
-
-    //This method calculates the average grade for an entire university
-    public float averageGradeOfSubjectByAllUniversity(String subjectSearch){
-        int average = 0;
-        int countSubjects = 0;
-        for (Student student: allStudent){
-            for (Subject subject:student.getStudentSubjects()){
-                if (subjectSearch.equals(subject.getNameSubject())) {
-                    average += subject.getGrade();
-                    countSubjects++;
-                }
-            }
-        }
-        return (float) average/countSubjects;
-    }
-
-    public List<Student> getAllStudent() {
-        return allStudent;
-    }
-
-    public University(List<Student> allStudent) {
-        this.allStudent = allStudent;
+        return listOfBiologists;
     }
 
 
