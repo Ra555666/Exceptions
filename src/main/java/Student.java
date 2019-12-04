@@ -1,5 +1,5 @@
-import Facultys.GroupOfStudents;
-import Facultys.TypeFaculity;
+import facultys.GroupOfStudents;
+import facultys.TypeFaculity;
 
 import java.util.ArrayList;
 import java.util.List;

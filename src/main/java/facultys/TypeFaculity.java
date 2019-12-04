@@ -1,8 +1,4 @@
-package Facultys;
-
-import javax.security.auth.Subject;
-import java.util.ArrayList;
-import java.util.List;
+package facultys;
 
 public enum TypeFaculity {
     CHEMICAL("Chemical"),

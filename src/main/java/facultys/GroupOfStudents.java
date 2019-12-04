@@ -1,4 +1,4 @@
-package Facultys;
+package facultys;
 
 public enum GroupOfStudents {
     EASY("I Can Win"),

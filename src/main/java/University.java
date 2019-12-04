@@ -1,5 +1,7 @@
-import Facultys.GroupOfStudents;
-import Facultys.TypeFaculity;
+import exceptions.ExceedingPermissibleLimitsOfAssessmentException;
+import exceptions.NonAvailabilityStudentException;
+import facultys.GroupOfStudents;
+import facultys.TypeFaculity;
 
 import java.util.*;
 
@@ -10,6 +12,8 @@ public class University {
         Random randomGrade = new Random();
         int gradeFirst = randomGrade.nextInt(10) + 1;
         int gradeSecond = randomGrade.nextInt(10) + 1;
+//        int gradeFirst = 100;
+//        int gradeSecond = 100;
         switch (faculty) {
             case BIOLOGY:
                 return Arrays.asList(new Subject("Human Biology", gradeFirst), new Subject("Animal Biology", gradeSecond));
@@ -50,8 +54,16 @@ public class University {
                 searchStudent = student;
             }
         }
+        try {
+            if (searchStudent.getFirstName() == null) {
+                throw new NonAvailabilityStudentException();
+            }
+        } catch (NonAvailabilityStudentException e) {
+            System.err.println("Student is not listed");
+        }
         return searchStudent;
     }
+
 
     //This method calculates the average mark in all subjects of the student
     public void averageStudentGradeCalculator(Student student) {
@@ -61,7 +73,15 @@ public class University {
             average += subject.getGrade();
             countSubject++;
         }
-        System.out.println("Average grade " + student.getFirstName() + " " + student.getLastName() + " is " + (float) average / countSubject);
+        float averageGrade = (float) average / countSubject;
+        try {
+            if (averageGrade < 0 || averageGrade > 10) {
+                throw new ExceedingPermissibleLimitsOfAssessmentException();
+            }
+        } catch (ExceedingPermissibleLimitsOfAssessmentException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Average grade " + student.getFirstName() + " " + student.getLastName() + " is " + averageGrade);
     }
 
 

@@ -1,7 +1,3 @@
-import Facultys.TypeFaculity;
-
-import java.util.List;
-
 public class Subject {
     private String nameSubject;
     private int grade;
