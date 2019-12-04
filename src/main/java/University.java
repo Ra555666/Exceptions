@@ -1,5 +1,6 @@
 import exceptions.ExceedingPermissibleLimitsOfAssessmentException;
 import exceptions.NonAvailabilityStudentException;
+import exceptions.TooFewSubjectsException;
 import facultys.GroupOfStudents;
 import facultys.TypeFaculity;
 
@@ -71,7 +72,14 @@ public class University {
         int countSubject = 0;
         for (Subject subject : student.getStudentSubjects()) {
             average += subject.getGrade();
-            countSubject++;
+           countSubject++;
+        }
+        try{
+            if (countSubject<1){
+                throw new TooFewSubjectsException();
+            }
+        }catch (TooFewSubjectsException e){
+            System.out.println(e.getMessage());
         }
         float averageGrade = (float) average / countSubject;
         try {
