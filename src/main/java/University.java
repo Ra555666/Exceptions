@@ -1,3 +1,4 @@
+import exceptions.EmptyGroupException;
 import exceptions.ExceedingPermissibleLimitsOfAssessmentException;
 import exceptions.NonAvailabilityStudentException;
 import exceptions.TooFewSubjectsException;
@@ -148,6 +149,22 @@ public class University {
 
     public University(List<Student> allStudent) {
         this.allStudent = allStudent;
+    }
+
+    public List<Student> getListStudentsOfEasyGroup(){
+        List<Student> listEasy = new ArrayList<>();
+        for(Student student: allStudent){
+            if (student.getGroupOfStudents().equals(GroupOfStudents.EASY)){
+                listEasy.add(student);
+            }
+        }try {
+            if (listEasy.isEmpty()){
+                throw new EmptyGroupException();
+            }
+        }catch (EmptyGroupException e){
+            System.out.println(e.getMessage());
+        }
+        return listEasy;
     }
 
     public List<Student> getListStudentsOfChemicalFaculty() {
