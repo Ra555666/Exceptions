@@ -1,11 +1,14 @@
 package facultys;
 
+import java.util.List;
+
 public enum TypeFaculity {
     CHEMICAL("Chemical"),
     BIOLOGY("Biological"),
     PHYSICAL("Physics");
 
     private String title;
+
 
     TypeFaculity(String title){
         this.title = title;

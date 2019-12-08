@@ -42,10 +42,10 @@ public class Main {
 
 //        testUniversity.averageStudentGradeCalculator(testUniversity.getStudentFromListOfStudents());
 
-//        testUniversity.averageGradeBySubjectOfGroupAndFaculty();
+        testUniversity.averageGradeBySubjectOfGroupAndFaculty();
 //
 //        testUniversity.averageGradeOfSubjectByAllUniversity();
 
-        System.out.println(testUniversity.getListStudentsOfEasyGroup());
+//        System.out.println(testUniversity.getListStudentsOfEasyGroup());
     }
 }

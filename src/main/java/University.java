@@ -1,7 +1,4 @@
-import exceptions.EmptyGroupException;
-import exceptions.ExceedingPermissibleLimitsOfAssessmentException;
-import exceptions.NonAvailabilityStudentException;
-import exceptions.TooFewSubjectsException;
+import exceptions.*;
 import facultys.GroupOfStudents;
 import facultys.TypeFaculity;
 
@@ -73,24 +70,35 @@ public class University {
         int countSubject = 0;
         for (Subject subject : student.getStudentSubjects()) {
             average += subject.getGrade();
-           countSubject++;
-        }
-        try{
-            if (countSubject<1){
-                throw new TooFewSubjectsException();
-            }
-        }catch (TooFewSubjectsException e){
-            System.out.println(e.getMessage());
+            countSubject++;
         }
         float averageGrade = (float) average / countSubject;
         try {
-            if (averageGrade < 0 || averageGrade > 10) {
-                throw new ExceedingPermissibleLimitsOfAssessmentException();
+            if (countSubject < 1) {
+                throw new TooFewSubjectsException();
+            } else if (averageGrade < 0 || averageGrade > 10) {
+                throw new WrongGradeException();
             }
-        } catch (ExceedingPermissibleLimitsOfAssessmentException e) {
+        } catch (TooFewSubjectsException e) {
+            System.out.println(e.getMessage());
+        } catch (WrongGradeException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("Average grade " + student.getFirstName() + " " + student.getLastName() + " is " + averageGrade);
+    }
+
+    public float averageStudentGradeCalculator(List<Student> studentsList, String subjectSearch) {
+        int average = 0;
+        int countSubjects = 0;
+        for (Student student : studentsList) {
+            for (Subject subject : student.getStudentSubjects()) {
+                if (subjectSearch.equals(subject.getNameSubject())) {
+                    average += subject.getGrade();
+                    countSubjects++;
+                }
+            }
+        }
+        return (float) average / countSubjects;
     }
 
 
@@ -101,25 +109,25 @@ public class University {
         String subjectSearch = scanner.nextLine();
         System.out.print("Input group: ");
         String group = scanner.nextLine();
+        try {
+            switch (group){
+                case "I Can Win": break;
+                case "Hurt Me Plenty":break;
+                case "Nightmare!":break;
+                default: throw  new LackOfGroupsOnFacultyException();
+            }
+        } catch (LackOfGroupsOnFacultyException e) {
+            System.out.println(e.getMessage());
+        }
         System.out.print("Input faculty: ");
         String faculty = scanner.nextLine();
-        int average = 0;
-        int countSubjects = 0;
         List<Student> tempList = new ArrayList<>();
         for (Student student : allStudent) {
             if (faculty.equals(student.getTypeFaculity().getFacultyTitle()) && group.equals(student.getGroupOfStudents().getGroupTitle())) {
                 tempList.add(student);
             }
         }
-        for (Student student : tempList) {
-            for (Subject subject : student.getStudentSubjects()) {
-                if (subjectSearch.equals(subject.getNameSubject())) {
-                    average += subject.getGrade();
-                    countSubjects++;
-                }
-            }
-        }
-        System.out.println("Average grade of " + subjectSearch + " on group " + group + " on " + faculty + " faculty is " + (float) average / countSubjects);
+        System.out.println("Average grade of " + subjectSearch + " on group " + group + " on " + faculty + " faculty is " + averageStudentGradeCalculator(tempList, subjectSearch));
 
     }
 
@@ -129,18 +137,7 @@ public class University {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Input name  of subject: ");
         String subjectSearch = scanner.nextLine();
-        int average = 0;
-        int countSubjects = 0;
-        for (Student student : allStudent) {
-            for (Subject subject : student.getStudentSubjects()) {
-                if (subjectSearch.equals(subject.getNameSubject())) {
-                    average += subject.getGrade();
-                    countSubjects++;
-                }
-            }
-        }
-        System.out.println("Average grade of " + subjectSearch + " by whole university is " + (float) average / countSubjects);
-
+        System.out.println("Average grade of " + subjectSearch + " by whole university is " + averageStudentGradeCalculator(allStudent, subjectSearch));
     }
 
     public List<Student> getAllStudent() {
@@ -151,17 +148,18 @@ public class University {
         this.allStudent = allStudent;
     }
 
-    public List<Student> getListStudentsOfEasyGroup(){
+    public List<Student> getListStudentsOfEasyGroup() {
         List<Student> listEasy = new ArrayList<>();
-        for(Student student: allStudent){
-            if (student.getGroupOfStudents().equals(GroupOfStudents.EASY)){
+        for (Student student : allStudent) {
+            if (student.getGroupOfStudents().equals(GroupOfStudents.EASY)) {
                 listEasy.add(student);
             }
-        }try {
-            if (listEasy.isEmpty()){
+        }
+        try {
+            if (listEasy.isEmpty()) {
                 throw new EmptyGroupException();
             }
-        }catch (EmptyGroupException e){
+        } catch (EmptyGroupException e) {
             System.out.println(e.getMessage());
         }
         return listEasy;
