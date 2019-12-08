@@ -110,11 +110,13 @@ public class University {
         System.out.print("Input group: ");
         String group = scanner.nextLine();
         try {
-            switch (group){
-                case "I Can Win": break;
-                case "Hurt Me Plenty":break;
-                case "Nightmare!":break;
-                default: throw  new LackOfGroupsOnFacultyException();
+            switch (group) {
+                case "I Can Win":
+                case "Hurt Me Plenty":
+                case "Nightmare!":
+                    break;
+                default:
+                    throw new LackOfGroupsOnFacultyException();
             }
         } catch (LackOfGroupsOnFacultyException e) {
             System.out.println(e.getMessage());
