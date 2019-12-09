@@ -7,6 +7,11 @@ import java.util.*;
 public class University {
     private List<Student> allStudent;
 
+    public University(List<Student> allStudent) {
+        this.allStudent = allStudent;
+    }
+
+
     public static List<Subject> addListOfSubjectByFaculty(TypeFaculity faculty) {
         Random randomGrade = new Random();
         int gradeFirst = randomGrade.nextInt(10) + 1;
@@ -25,6 +30,7 @@ public class University {
         }
     }
 
+
     public static List<Subject> addSubjectsOfGroupToSubjectList(GroupOfStudents groupOfStudents) {
         Random randomGrade = new Random();
         int gradeFirst = randomGrade.nextInt(10) + 1;
@@ -40,6 +46,7 @@ public class University {
                 return new ArrayList<>();
         }
     }
+
 
     public Student getStudentFromListOfStudents() {
         Scanner scanner = new Scanner(System.in);
@@ -130,7 +137,6 @@ public class University {
             }
         }
         System.out.println("Average grade of " + subjectSearch + " on group " + group + " on " + faculty + " faculty is " + averageStudentGradeCalculator(tempList, subjectSearch));
-
     }
 
 
@@ -142,9 +148,6 @@ public class University {
         System.out.println("Average grade of " + subjectSearch + " by whole university is " + averageStudentGradeCalculator(allStudent, subjectSearch));
     }
 
-    public University(List<Student> allStudent) {
-        this.allStudent = allStudent;
-    }
 
     public List<Student> getListStudentsOfEasyGroup() {
         List<Student> listEasy = new ArrayList<>();
@@ -161,25 +164,5 @@ public class University {
             System.out.println(e.getMessage());
         }
         return listEasy;
-    }
-
-    public List<Student> getListStudentsOfChemicalFaculty() {
-        List<Student> listOfChemists = new ArrayList<>();
-        for (Student student : allStudent) {
-            if (student.getTypeFaculity().equals(TypeFaculity.CHEMICAL)) {
-                listOfChemists.add(student);
-            }
-        }
-        return listOfChemists;
-    }
-
-    public List<Student> getListStudentsOfPhysicalFaculty() {
-        List<Student> listOfPhysics = new ArrayList<>();
-        for (Student student : allStudent) {
-            if (student.getTypeFaculity().equals(TypeFaculity.PHYSICAL)) {
-                listOfPhysics.add(student);
-            }
-        }
-        return listOfPhysics;
     }
 }

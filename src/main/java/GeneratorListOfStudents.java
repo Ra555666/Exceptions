@@ -4,7 +4,7 @@ import facultys.TypeFaculity;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListOfStudents {
+public class GeneratorListOfStudents {
     //    static List<Student> allStudent = Arrays.asList(
 //            new Student("John","Smith", TypeFaculity.PHYSICAL, GroupOfStudents.EASY),
 //            new Student("Martin","Goose", TypeFaculity.PHYSICAL, GroupOfStudents.NORMAL),

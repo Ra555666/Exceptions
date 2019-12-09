@@ -1,14 +1,8 @@
-import facultys.GroupOfStudents;
-import facultys.TypeFaculity;
-
-import java.util.Arrays;
-import java.util.List;
-
 public class Main {
 
     public static void main(String[] args) {
-        University testUniversity = new University(ListOfStudents.getAllStudent());
-        System.out.println(ListOfStudents.getAllStudent().toString());
+        University testUniversity = new University(GeneratorListOfStudents.getAllStudent());
+        System.out.println(GeneratorListOfStudents.getAllStudent().toString());
 
         testUniversity.averageStudentGradeCalculator(testUniversity.getStudentFromListOfStudents());
 
