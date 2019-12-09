@@ -62,14 +62,14 @@ public class University {
                 throw new NonAvailabilityStudentException();
             }
         } catch (NonAvailabilityStudentException e) {
-            System.err.println("Student is not listed");
+            System.out.println(e.getMessage());
         }
         return searchStudent;
     }
 
 
     //This method calculates the average mark in all subjects of the student
-    public void averageStudentGradeCalculator(Student student) {
+    public static void averageStudentGradeCalculator(Student student) {
         int countSubject = 0;
         for (Subject subject : student.getStudentSubjects()) {
             average += subject.getGrade();
@@ -88,7 +88,7 @@ public class University {
         System.out.println("Average grade " + student.getFirstName() + " " + student.getLastName() + " is " + averageGrade);
     }
 
-    public float averageStudentGradeCalculator(List<Student> studentsList, String subjectSearch) {
+    public static float averageStudentGradeCalculator(List<Student> studentsList, String subjectSearch) {
         int countSubjects = 0;
         for (Student student : studentsList) {
             for (Subject subject : student.getStudentSubjects()) {

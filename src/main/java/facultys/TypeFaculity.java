@@ -1,6 +1,5 @@
 package facultys;
 
-import java.util.List;
 
 public enum TypeFaculity {
     CHEMICAL("Chemical"),
