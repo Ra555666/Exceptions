@@ -142,10 +142,6 @@ public class University {
         System.out.println("Average grade of " + subjectSearch + " by whole university is " + averageStudentGradeCalculator(allStudent, subjectSearch));
     }
 
-    public List<Student> getAllStudent() {
-        return allStudent;
-    }
-
     public University(List<Student> allStudent) {
         this.allStudent = allStudent;
     }
@@ -186,16 +182,4 @@ public class University {
         }
         return listOfPhysics;
     }
-
-    public List<Student> getListStudentsOfBiologicalFaculty() {
-        List<Student> listOfBiologists = new ArrayList<>();
-        for (Student student : allStudent) {
-            if (student.getTypeFaculity().equals(TypeFaculity.BIOLOGY)) {
-                listOfBiologists.add(student);
-            }
-        }
-        return listOfBiologists;
-    }
-
-
 }
