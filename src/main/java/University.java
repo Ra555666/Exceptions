@@ -6,6 +6,12 @@ import java.util.*;
 
 public class University {
     private List<Student> allStudent;
+    private static Random randomGrade = new Random();
+    private static int gradeFirst = randomGrade.nextInt(10) + 1;
+    private static int gradeSecond = randomGrade.nextInt(10) + 1;
+    private static Scanner scanner = new Scanner(System.in);
+    private static int average = 0;
+
 
     public University(List<Student> allStudent) {
         this.allStudent = allStudent;
@@ -13,11 +19,6 @@ public class University {
 
 
     public static List<Subject> addListOfSubjectByFaculty(TypeFaculity faculty) {
-        Random randomGrade = new Random();
-        int gradeFirst = randomGrade.nextInt(10) + 1;
-        int gradeSecond = randomGrade.nextInt(10) + 1;
-//        int gradeFirst = 100;
-//        int gradeSecond = 100;
         switch (faculty) {
             case BIOLOGY:
                 return Arrays.asList(new Subject("Human Biology", gradeFirst), new Subject("Animal Biology", gradeSecond));
@@ -32,9 +33,6 @@ public class University {
 
 
     public static List<Subject> addSubjectsOfGroupToSubjectList(GroupOfStudents groupOfStudents) {
-        Random randomGrade = new Random();
-        int gradeFirst = randomGrade.nextInt(10) + 1;
-        int gradeSecond = randomGrade.nextInt(10) + 1;
         switch (groupOfStudents) {
             case EASY:
                 return Arrays.asList(new Subject("PE", gradeFirst), new Subject("Art", gradeSecond));
@@ -49,7 +47,6 @@ public class University {
 
 
     public Student getStudentFromListOfStudents() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Input first name: ");
         String firstName = scanner.nextLine();
         System.out.print("Input last name: ");
@@ -73,7 +70,6 @@ public class University {
 
     //This method calculates the average mark in all subjects of the student
     public void averageStudentGradeCalculator(Student student) {
-        int average = 0;
         int countSubject = 0;
         for (Subject subject : student.getStudentSubjects()) {
             average += subject.getGrade();
@@ -86,16 +82,13 @@ public class University {
             } else if (averageGrade < 0 || averageGrade > 10) {
                 throw new WrongGradeException();
             }
-        } catch (TooFewSubjectsException e) {
-            System.out.println(e.getMessage());
-        } catch (WrongGradeException e) {
+        } catch (TooFewSubjectsException | WrongGradeException e) {
             System.out.println(e.getMessage());
         }
         System.out.println("Average grade " + student.getFirstName() + " " + student.getLastName() + " is " + averageGrade);
     }
 
     public float averageStudentGradeCalculator(List<Student> studentsList, String subjectSearch) {
-        int average = 0;
         int countSubjects = 0;
         for (Student student : studentsList) {
             for (Subject subject : student.getStudentSubjects()) {
@@ -111,7 +104,6 @@ public class University {
 
     //This method calculates the average score for a specific subject in a specific group and at a specific faculty
     public void averageGradeBySubjectOfGroupAndFaculty() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Input subject: ");
         String subjectSearch = scanner.nextLine();
         System.out.print("Input group: ");
@@ -142,7 +134,6 @@ public class University {
 
     //This method calculates the average grade for an entire university
     public void averageGradeOfSubjectByAllUniversity() {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("Input name  of subject: ");
         String subjectSearch = scanner.nextLine();
         System.out.println("Average grade of " + subjectSearch + " by whole university is " + averageStudentGradeCalculator(allStudent, subjectSearch));
